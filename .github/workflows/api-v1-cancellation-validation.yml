@@ -13,6 +13,8 @@ permissions:
 
 jobs:
   validate:
+    # A dependency-lock-only rerun reuses the separately recorded Rust run on the same fixed SHA.
+    if: ${{ !contains(github.event.head_commit.message, '[python-only]') }}
     runs-on: ubuntu-latest
     timeout-minutes: 40
     env:
