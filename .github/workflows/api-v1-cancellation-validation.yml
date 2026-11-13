@@ -1,0 +1,215 @@
+# Independent CPU validation of fixed public source
+# 7af8b6c6cc0b6ee3630c14d218fb7f9ac9858bf3 on andrewzyxing/sglang.
+# Not part of PR #50042 / feat/api-v1-cancellation-completion.
+name: API v1 cancellation validation
+
+on:
+  push:
+    branches:
+      - ci/api-v1-cancellation-validation-20261113
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      CARGO_BUILD_JOBS: "2"
+    defaults:
+      run:
+        working-directory: rust
+    steps:
+      - name: Checkout fixed source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          repository: andrewzyxing/sglang
+          ref: 7af8b6c6cc0b6ee3630c14d218fb7f9ac9858bf3
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install protoc + Rust toolchain
+        working-directory: .
+        run: bash scripts/ci/utils/install_rust_protoc.sh
+
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust
+          save-if: false
+
+      - name: cargo gen-api (generated bindings are up to date)
+        run: |
+          env -u PROTOC cargo gen-api --locked
+          generated=(sglang-api-types sglang-runtime-v1-types ../python/sglang/api/v1)
+          if [[ -n "$(git status --porcelain --untracked-files=all -- "${generated[@]}")" ]]; then
+            git status --short --untracked-files=all -- "${generated[@]}"
+            git diff -- "${generated[@]}"
+            echo "::error::Generated bindings are stale: run 'cargo gen-api' in rust/ and commit the result."
+            exit 1
+          fi
+
+      - name: cargo test (sglang-api-types)
+        run: cargo test --locked -p sglang-api-types
+
+      - name: cargo test (handlers retirement)
+        run: |
+          set -euo pipefail
+          cargo test --locked -p sglang-server --lib api_server::handlers::retirement::tests | tee "${RUNNER_TEMP}/handlers-retirement.log"
+          grep -Eq 'test result: ok\. [1-9][0-9]* passed;' "${RUNNER_TEMP}/handlers-retirement.log"
+
+      - name: cargo test (grpc abort_)
+        run: |
+          set -euo pipefail
+          cargo test --locked -p sglang-server --lib api_server::grpc::service::tests::abort_ | tee "${RUNNER_TEMP}/grpc-abort.log"
+          grep -Eq 'test result: ok\. [1-9][0-9]* passed;' "${RUNNER_TEMP}/grpc-abort.log"
+
+      - name: cargo test (tokenizer_manager to_scheduler)
+        run: |
+          set -euo pipefail
+          cargo test --locked -p sglang-server --lib tokenizer_manager::to_scheduler::tests | tee "${RUNNER_TEMP}/to-scheduler.log"
+          grep -Eq 'test result: ok\. [1-9][0-9]* passed;' "${RUNNER_TEMP}/to-scheduler.log"
+
+      - name: cargo test (message io_struct)
+        run: |
+          set -euo pipefail
+          cargo test --locked -p sglang-server --lib message::io_struct::tests | tee "${RUNNER_TEMP}/io-struct.log"
+          grep -Eq 'test result: ok\. [1-9][0-9]* passed;' "${RUNNER_TEMP}/io-struct.log"
+
+      # Admission handoff: drop-cancel before/after intake acceptance.
+      - name: cargo test (handlers handle cancellation_)
+        run: |
+          set -euo pipefail
+          cargo test --locked -p sglang-server --lib api_server::handlers::handle::tests::cancellation_ | tee "${RUNNER_TEMP}/handle-cancellation.log"
+          grep -Eq 'test result: ok\. [1-9][0-9]* passed;' "${RUNNER_TEMP}/handle-cancellation.log"
+
+      # Generation ownership: explicit abort across admission, batch, and sink races.
+      - name: cargo test (handlers generate explicit_abort)
+        run: |
+          set -euo pipefail
+          cargo test --locked -p sglang-server --lib api_server::handlers::generate::tests::explicit_abort | tee "${RUNNER_TEMP}/generate-explicit-abort.log"
+          grep -Eq 'test result: ok\. [1-9][0-9]* passed;' "${RUNNER_TEMP}/generate-explicit-abort.log"
+
+  # Independent of the Rust job. Lockfile lives only on this CI branch;
+  # source under test is the fixed public commit (not a mutable branch tip).
+  validate-python-cpu:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONPATH: ${{ github.workspace }}/python
+      SGLANG_UNIFIED_RADIX_TREE_CORE_BACKEND: python
+      SGLANG_IS_IN_CI: "1"
+      PYTHONDONTWRITEBYTECODE: "1"
+      PYTHONNOUSERSITE: "1"
+      HF_HUB_OFFLINE: "1"
+      HF_DATASETS_OFFLINE: "1"
+    steps:
+      - name: Checkout CI workflow commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - name: Stage dependency lock
+        run: |
+          set -euo pipefail
+          cp .github/requirements/api-v1-cancellation-cpu-20261113.txt \
+            "${RUNNER_TEMP}/api-v1-cancellation-cpu-20261113.txt"
+
+      - name: Checkout fixed source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          repository: andrewzyxing/sglang
+          ref: 7af8b6c6cc0b6ee3630c14d218fb7f9ac9858bf3
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install hashed CPU dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --require-hashes \
+            -r "${RUNNER_TEMP}/api-v1-cancellation-cpu-20261113.txt"
+          python -m pip check
+
+      - name: Run Python retirement suites
+        run: |
+          set -euo pipefail
+          set +e
+          python -m pytest -ra --strict-markers \
+            --junitxml="${RUNNER_TEMP}/retirement.xml" \
+            test/registered/unit/managers/test_scheduler_cancellation_retirement.py \
+            test/registered/unit/managers/test_cancel_retirement_frontend.py \
+            test/registered/unit/managers/test_scheduler_chunked_abort_race.py \
+            test/registered/unit/multimodal/rust/shared/test_rust_server_extension.py \
+            test/registered/unit/api/v1/test_json_contract.py \
+            test/registered/unit/api/v1/test_parity.py
+          pytest_rc=$?
+          set -e
+          python - <<'PY'
+          import os
+          import sys
+          import xml.etree.ElementTree as ET
+
+          path = os.path.join(os.environ["RUNNER_TEMP"], "retirement.xml")
+          if not os.path.isfile(path):
+              print(f"::error::Missing junit report: {path}", file=sys.stderr)
+              sys.exit(1)
+
+          root = ET.parse(path).getroot()
+          suites = (
+              [root]
+              if root.tag == "testsuite"
+              else list(root.findall("testsuite"))
+          )
+          if not suites:
+              print("::error::No testsuite elements in junit report", file=sys.stderr)
+              sys.exit(1)
+
+          tests = failures = errors = skipped = 0
+          for suite in suites:
+              tests += int(suite.attrib.get("tests", 0))
+              failures += int(suite.attrib.get("failures", 0))
+              errors += int(suite.attrib.get("errors", 0))
+              skipped += int(suite.attrib.get("skipped", 0))
+
+          print(
+              f"junit counts: tests={tests} failures={failures} "
+              f"errors={errors} skipped={skipped}"
+          )
+
+          for case in root.iter("testcase"):
+              bad = list(case.findall("failure")) + list(case.findall("error"))
+              if not bad:
+                  continue
+              name = f"{case.get('classname')}::{case.get('name')}"
+              print(f"::error::Failed test {name}")
+              for node in bad:
+                  msg = node.get("message") or ""
+                  if msg:
+                      print(msg)
+                  if node.text:
+                      print(node.text)
+
+          if tests - skipped <= 0:
+              print("::error::junit reported no executed tests", file=sys.stderr)
+              sys.exit(1)
+          if failures or errors:
+              print(
+                  f"::error::junit failures={failures} errors={errors}",
+                  file=sys.stderr,
+              )
+              sys.exit(1)
+          PY
+          if [[ "$pytest_rc" -ne 0 ]]; then
+            echo "::error::pytest exited with status ${pytest_rc} despite clean junit"
+            exit "$pytest_rc"
+          fi
