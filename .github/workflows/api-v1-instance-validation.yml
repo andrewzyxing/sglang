@@ -1,0 +1,76 @@
+# Independent CPU validation of fixed public source
+# 90823ff0942e38e8710c292c69cc8fd0dc9aaa00 on andrewzyxing/sglang.
+# Not part of PR #50044 / feat/api-v1-engine-instance-id.
+name: API v1 instance validation
+
+on:
+  push:
+    branches:
+      - ci/api-v1-instance-validation-20261113
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CARGO_BUILD_JOBS: "2"
+    defaults:
+      run:
+        working-directory: rust
+    steps:
+      - name: Checkout fixed source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          repository: andrewzyxing/sglang
+          ref: 90823ff0942e38e8710c292c69cc8fd0dc9aaa00
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install protoc + Rust toolchain
+        working-directory: .
+        run: bash scripts/ci/utils/install_rust_protoc.sh
+
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust
+          save-if: false
+
+      - name: cargo gen-api (generated bindings are up to date)
+        run: |
+          env -u PROTOC cargo gen-api --locked
+          generated=(sglang-api-types sglang-runtime-v1-types ../python/sglang/api/v1)
+          if [[ -n "$(git status --porcelain --untracked-files=all -- "${generated[@]}")" ]]; then
+            git status --short --untracked-files=all -- "${generated[@]}"
+            git diff -- "${generated[@]}"
+            echo "::error::Generated bindings are stale: run 'cargo gen-api' in rust/ and commit the result."
+            exit 1
+          fi
+
+      - name: cargo test (sglang-api-types)
+        run: cargo test --locked -p sglang-api-types
+
+      - name: cargo test (handlers info)
+        run: |
+          set -euo pipefail
+          cargo test --locked -p sglang-server --lib api_server::handlers::info::tests | tee "${RUNNER_TEMP}/handlers-info.log"
+          grep -Eq 'test result: ok\. [1-9][0-9]* passed;' "${RUNNER_TEMP}/handlers-info.log"
+
+      - name: cargo test (grpc server_info_instance_id)
+        run: |
+          set -euo pipefail
+          cargo test --locked -p sglang-server --lib api_server::grpc::service::tests::server_info_instance_id | tee "${RUNNER_TEMP}/grpc-server-info-instance-id.log"
+          grep -Eq 'test result: ok\. [1-9][0-9]* passed;' "${RUNNER_TEMP}/grpc-server-info-instance-id.log"
+
+      - name: cargo test (http server_info)
+        run: |
+          set -euo pipefail
+          cargo test --locked -p sglang-server --lib api_server::http::info::tests::server_info | tee "${RUNNER_TEMP}/http-server-info.log"
+          grep -Eq 'test result: ok\. [1-9][0-9]* passed;' "${RUNNER_TEMP}/http-server-info.log"
