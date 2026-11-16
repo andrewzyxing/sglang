@@ -1,5 +1,5 @@
 # Independent CPU validation of fixed public source
-# e61e29f8cd4820f88e3e10547b5d1f680254349e on andrewzyxing/sglang.
+# 824c6cbc17d95457ef7bf93aa98711d7cc5e56b7 on andrewzyxing/sglang.
 # Not part of PR #50042 / feat/api-v1-cancellation-completion.
 name: API v1 cancellation validation
 
@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: andrewzyxing/sglang
-          ref: e61e29f8cd4820f88e3e10547b5d1f680254349e
+          ref: 824c6cbc17d95457ef7bf93aa98711d7cc5e56b7
           persist-credentials: false
 
       - name: Set up Python
@@ -55,6 +55,9 @@ jobs:
             echo "::error::Generated bindings are stale: run 'cargo gen-api' in rust/ and commit the result."
             exit 1
           fi
+
+      - name: Check router api-types lockfile
+        run: cargo metadata --locked --manifest-path ../sgl-router/Cargo.toml --no-deps --format-version 1 > /dev/null
 
       - name: cargo test (sglang-api-types)
         run: cargo test --locked -p sglang-api-types
@@ -140,7 +143,7 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: andrewzyxing/sglang
-          ref: e61e29f8cd4820f88e3e10547b5d1f680254349e
+          ref: 824c6cbc17d95457ef7bf93aa98711d7cc5e56b7
           persist-credentials: false
 
       - name: Set up Python
