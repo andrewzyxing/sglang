@@ -1,0 +1,87 @@
+name: API v1 prepared input validation
+
+on:
+  push:
+    branches:
+      - ci/api-v1-prepared-input-validation-20261116
+
+permissions:
+  contents: read
+
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      CARGO_BUILD_JOBS: "2"
+    defaults:
+      run:
+        working-directory: rust
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: andrewzyxing/sglang
+          ref: 3d982bf443110f3282055a1ffba3c652944ab8db
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install protoc and Rust
+        working-directory: .
+        run: bash scripts/ci/utils/install_rust_protoc.sh
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust
+          save-if: false
+      - name: Regenerate canonical bindings
+        run: |
+          set -euo pipefail
+          env -u PROTOC cargo gen-api --locked
+          test -z "$(git status --porcelain --untracked-files=all -- sglang-api-types sglang-runtime-v1-types ../python/sglang/api/v1)"
+      - name: Check router lockfile
+        run: cargo metadata --locked --manifest-path ../sgl-router/Cargo.toml --no-deps --format-version 1 > /dev/null
+      - name: API types wire and JSON tests
+        run: cargo test --locked -p sglang-api-types
+      - name: Multimodal, admission, normalization and discovery regressions
+        run: |
+          set -euo pipefail
+          for suite in multi_modality:: message::request::tests api_server::core::prefetch::tests api_server::handlers::info::tests api_server::grpc::service::tests; do
+            cargo test --locked -p sglang-server --lib "$suite" | tee "${RUNNER_TEMP}/tests.log"
+            grep -Eq 'test result: ok\. [1-9][0-9]* passed;' "${RUNNER_TEMP}/tests.log"
+          done
+  python:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      PYTHONPATH: ${{ github.workspace }}/python
+      SGLANG_UNIFIED_RADIX_TREE_CORE_BACKEND: python
+      SGLANG_IS_IN_CI: "1"
+      PYTHONDONTWRITEBYTECODE: "1"
+      PYTHONNOUSERSITE: "1"
+      HF_HUB_OFFLINE: "1"
+      HF_DATASETS_OFFLINE: "1"
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Stage fixed CPU dependency lock
+        run: cp .github/requirements/api-v1-prepared-input-cpu-20261116.txt "${RUNNER_TEMP}/cpu.txt"
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: andrewzyxing/sglang
+          ref: 3d982bf443110f3282055a1ffba3c652944ab8db
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned CPU dependencies
+        run: |
+          python -m pip install --require-hashes -r "${RUNNER_TEMP}/cpu.txt"
+          python -m pip check
+      - name: JSON, shared parity and Python HTTP adapter
+        run: |
+          set -euo pipefail
+          python -m pytest -ra --strict-markers --junitxml="${RUNNER_TEMP}/prepared.xml" \
+            test/registered/unit/api/v1/test_json_contract.py \
+            test/registered/unit/api/v1/test_parity.py \
+            test/registered/unit/entrypoints/test_generate_api_contract.py
