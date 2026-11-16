@@ -1,5 +1,5 @@
 # Independent CPU validation of fixed public source
-# 3e6be2189ccd6be9ba6d5d544b9523ba876bdfdd on andrewzyxing/sglang.
+# e61e29f8cd4820f88e3e10547b5d1f680254349e on andrewzyxing/sglang.
 # Not part of PR #50042 / feat/api-v1-cancellation-completion.
 name: API v1 cancellation validation
 
@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: andrewzyxing/sglang
-          ref: 3e6be2189ccd6be9ba6d5d544b9523ba876bdfdd
+          ref: e61e29f8cd4820f88e3e10547b5d1f680254349e
           persist-credentials: false
 
       - name: Set up Python
@@ -140,7 +140,7 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           repository: andrewzyxing/sglang
-          ref: 3e6be2189ccd6be9ba6d5d544b9523ba876bdfdd
+          ref: e61e29f8cd4820f88e3e10547b5d1f680254349e
           persist-credentials: false
 
       - name: Set up Python
