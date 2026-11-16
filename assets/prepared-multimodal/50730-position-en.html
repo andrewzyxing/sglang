@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Where #50730 fits in a multimodal request</title><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Serif:ital@0;1&family=Noto+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@400&family=Noto+Sans+TC:wght@400;500;600&family=Noto+Serif+TC:wght@400&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0;padding:24px;background:#f5f5f5;color:#2d3142;font-family:'Geist','PingFang SC',sans-serif}.frame{max-width:1280px;margin:auto}.diagram-container{width:100%;overflow-x:auto}svg{display:block;width:100%;min-width:1280px}@media print{body{padding:0}.diagram-container{overflow-x:visible}svg{min-width:0}}</style></head><body><main class="frame"><div class="diagram-container"><svg id="50730-position-en-root" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="50730-position-en-title 50730-position-en-desc">
+<title id="50730-position-en-title">Where #50730 fits in a multimodal request</title>
+<desc id="50730-position-en-desc">A text-and-two-images request illustrates common structural checks and tensor decoding; dashed connections and model-semantic import are not implemented yet.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4f5d75"/></marker></defs>
+<rect width="1280" height="720" fill="#f5f5f5"/>
+<text x="40" y="68" fill="#2d3142" font-family="&#x27;Instrument Serif&#x27;, &#x27;Noto Serif&#x27;, &#x27;Songti SC&#x27;, serif" font-size="40" font-weight="400">Where #50730 fits in a multimodal request</text>
+<text x="40" y="108" fill="#4f5d75" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="400">Example: "Compare the colors in these images" + image A + image B</text>
+<rect x="312" y="160" width="928" height="416" rx="8" fill="#f0f0f1" stroke="#bfc0c0" stroke-dasharray="6 4"/>
+<text x="336" y="188" fill="#5a6580" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="400">Inside SGLang · intended prepared-input path</text>
+<line x1="280" y1="376" x2="328" y2="376" stroke="#4f5d75" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+<line x1="508" y1="376" x2="556" y2="376" stroke="#4f5d75" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+<line x1="876" y1="376" x2="924" y2="376" stroke="#4f5d75" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+<line x1="1068" y1="448" x2="1068" y2="488" stroke="#4f5d75" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+<rect id="external-preprocessor" data-node-id="external-preprocessor" x="40" y="216" width="240" height="320" rx="6" fill="#f5f5f5" stroke="#4f5d75" stroke-width="1.2"/>
+<text x="56" y="244" fill="#2d3142" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="600">Sidecar / preprocessor</text>
+<text x="56" y="272" fill="#4f5d75" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="400">Existing preprocessing</text>
+<text x="56" y="300" fill="#2d3142" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="400">20 expanded token IDs</text>
+<text x="56" y="328" fill="#2d3142" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="600">Image A</text>
+<text x="56" y="350" fill="#2d3142" font-family="&#x27;Geist Mono&#x27;, &#x27;SFMono-Regular&#x27;, monospace" font-size="12" font-weight="400">f32 [16,1176] = 75,264 B</text>
+<text x="56" y="372" fill="#2d3142" font-family="&#x27;Geist Mono&#x27;, &#x27;SFMono-Regular&#x27;, monospace" font-size="12" font-weight="400">span [3,7)</text>
+<text x="56" y="400" fill="#2d3142" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="600">Image B</text>
+<text x="56" y="422" fill="#2d3142" font-family="&#x27;Geist Mono&#x27;, &#x27;SFMono-Regular&#x27;, monospace" font-size="12" font-weight="400">f32 [32,1176] = 150,528 B</text>
+<text x="56" y="444" fill="#2d3142" font-family="&#x27;Geist Mono&#x27;, &#x27;SFMono-Regular&#x27;, monospace" font-size="12" font-weight="400">span [10,18)</text>
+<text x="56" y="476" fill="#4f5d75" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="400">Per-item grid tensors</text>
+<text x="56" y="508" fill="#5a6580" font-family="&#x27;Geist Mono&#x27;, &#x27;SFMono-Regular&#x27;, monospace" font-size="12" font-weight="400">+ profile / fingerprint</text>
+<rect id="api-ingress" data-node-id="api-ingress" x="328" y="304" width="180" height="144" rx="6" fill="#f5f5f5" stroke="#4f5d75" stroke-width="1.2"/>
+<text x="344" y="336" fill="#2d3142" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="600">#50701</text>
+<text x="344" y="366" fill="#2d3142" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="400">api.v1 entry</text>
+<text x="344" y="396" fill="#4f5d75" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="400">Unpack fields</text>
+<text x="344" y="426" fill="#5a6580" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="400">Not wired yet</text>
+<rect id="prepared-foundation" data-node-id="prepared-foundation" x="556" y="216" width="320" height="320" rx="6" fill="#f9eae5" stroke="#bf4520" stroke-width="2"/>
+<text x="576" y="244" fill="#bf4520" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="600">#50730 · implemented</text>
+<text x="576" y="280" fill="#bf4520" font-family="&#x27;Geist Mono&#x27;, &#x27;SFMono-Regular&#x27;, monospace" font-size="12" font-weight="400">PreparedInput::check()</text>
+<text x="576" y="308" fill="#2d3142" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="400">Config / size limits</text>
+<text x="576" y="336" fill="#2d3142" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="400">Shape / dtype / byte length</text>
+<text x="576" y="364" fill="#2d3142" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="400">Valid, nonoverlapping spans</text>
+<line x1="576" y1="388" x2="856" y2="388" stroke="#bf4520" stroke-opacity="0.3"/>
+<text x="576" y="420" fill="#bf4520" font-family="&#x27;Geist Mono&#x27;, &#x27;SFMono-Regular&#x27;, monospace" font-size="12" font-weight="400">decode_tensors()</text>
+<text x="576" y="448" fill="#2d3142" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="400">Convert to existing Tensor</text>
+<text x="576" y="480" fill="#2d3142" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="400">Keep names, shapes, items</text>
+<text x="576" y="512" fill="#bf4520" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="400">Structure OK; semantics pending</text>
+<rect id="processor-semantic-import" data-node-id="processor-semantic-import" x="924" y="304" width="288" height="144" rx="6" fill="#f5f5f5" stroke="#4f5d75" stroke-width="1.2"/>
+<text x="944" y="336" fill="#2d3142" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="600">Existing model processor</text>
+<text x="944" y="366" fill="#2d3142" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="400">Semantic import: missing</text>
+<text x="944" y="396" fill="#4f5d75" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="400">Interpret grid / token rules</text>
+<text x="944" y="426" fill="#4f5d75" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="400">Validate; compute positions</text>
+<rect id="existing-inference" data-node-id="existing-inference" x="924" y="488" width="288" height="72" rx="6" fill="#f5f5f5" stroke="#4f5d75" stroke-width="1.2"/>
+<text x="944" y="516" fill="#2d3142" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="600">Existing inference</text>
+<text x="944" y="544" fill="#4f5d75" font-family="&#x27;Geist Mono&#x27;, &#x27;SFMono-Regular&#x27;, monospace" font-size="12" font-weight="400">Vision Encoder → LLM</text>
+<text x="40" y="608" fill="#2d3142" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="400">Invalid: A is 4 bytes short, or A/B token spans overlap → check fails before tensor conversion.</text>
+<text x="40" y="640" fill="#4f5d75" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="16" font-weight="400">Illustrative shapes and spans. Model-semantic import, shared memory, and API wiring are outside #50730.</text>
+<line x1="40" y1="660" x2="1240" y2="660" stroke="#bfc0c0"/>
+<line x1="40" y1="680" x2="76" y2="680" stroke="#4f5d75" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+<text x="88" y="685" fill="#4f5d75" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="12" font-weight="400">Dashed: integration pending</text>
+<text x="496" y="685" fill="#bf4520" font-family="&#x27;Geist&#x27;, &#x27;PingFang SC&#x27;, &#x27;Noto Sans SC&#x27;, &#x27;Microsoft YaHei&#x27;, sans-serif" font-size="12" font-weight="400">Orange: implemented library; CPU checks passed</text>
+<text x="1016" y="685" fill="#5a6580" font-family="&#x27;Geist Mono&#x27;, &#x27;SFMono-Regular&#x27;, monospace" font-size="12" font-weight="400">Source: 0910b7ff52</text>
+</svg></div></main></body></html>
