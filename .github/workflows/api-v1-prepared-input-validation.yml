@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           repository: andrewzyxing/sglang
-          ref: 3d982bf443110f3282055a1ffba3c652944ab8db
+          ref: c1fda297e76393f11a2f2a2e2fe14f436e0ab924
           persist-credentials: false
       - uses: actions/setup-python@v5
         with:
@@ -69,7 +69,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           repository: andrewzyxing/sglang
-          ref: 3d982bf443110f3282055a1ffba3c652944ab8db
+          ref: c1fda297e76393f11a2f2a2e2fe14f436e0ab924
           persist-credentials: false
       - uses: actions/setup-python@v5
         with:
