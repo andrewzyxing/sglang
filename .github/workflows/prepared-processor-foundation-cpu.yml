@@ -1,0 +1,36 @@
+name: Prepared processor foundation CPU validation
+on:
+  push:
+    branches: [ci/prepared-processor-boundary-validation-20261116]
+permissions:
+  contents: read
+jobs:
+  processor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CARGO_BUILD_JOBS: "2"
+      RUSTFLAGS: -D warnings
+    defaults:
+      run:
+        working-directory: rust
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: andrewzyxing/sglang
+          ref: 0910b7ff525309a416d5df1971a318d0daba1f6b
+          persist-credentials: false
+      - name: Install pinned Rust toolchain
+        run: rustup toolchain install
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust
+          save-if: false
+      - name: Check processor formatting
+        run: cargo fmt --package sglang-processor -- --check
+      - name: Lint CPU multimodal targets
+        run: cargo clippy --locked -p sglang-processor --no-default-features --features mm --all-targets -- -D warnings
+      - name: Test prepared input contract and existing multimodal parity
+        run: cargo test --locked -p sglang-processor --no-default-features --features mm
+      - name: Check feature gating
+        run: cargo test --locked -p sglang-processor --no-default-features
