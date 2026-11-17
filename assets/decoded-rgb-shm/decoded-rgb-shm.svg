@@ -85,8 +85,9 @@
 <text x="1048" y="508" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">Vision encoder → LLM</text>
 <text x="1048" y="528" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">Existing execution</text>
 </g>
-<text x="40" y="608" fill="#2d3142" font-family="Geist, system-ui, sans-serif" font-size="14" font-weight="600">Current scope: existing native image families · single rank · unified deployment</text>
-<text x="40" y="636" fill="#4f5d75" font-family="Geist, system-ui, sans-serif" font-size="12" font-weight="400">Native video / audio follow upstream; not enabled. No new per-model adapters or Python processor bridge.</text>
+<text x="40" y="608" fill="#2d3142" font-family="Geist, system-ui, sans-serif" font-size="14" font-weight="600">Per-engine image ingress · TP=DP=PP=1 · unified or P/D</text>
+<text x="40" y="632" fill="#4f5d75" font-family="Geist, system-ui, sans-serif" font-size="12" font-weight="400">P/D: separate local objects, boot IDs and receipts; both stages reuse this ingress. Existing KV transfer is not shown.</text>
+<text x="40" y="650" fill="#4f5d75" font-family="Geist, system-ui, sans-serif" font-size="12" font-weight="400">Native video / audio follow upstream; not enabled. No new per-model adapters or Python processor bridge.</text>
 <line x1="40" y1="660" x2="1240" y2="660" stroke="#bfc0c0"/>
 <text x="40" y="688" fill="#bf4520" font-family="Geist, system-ui, sans-serif" font-size="12" font-weight="400">ORANGE: #50781 SHM ingress</text>
 <text x="384" y="688" fill="#4f5d75" font-family="Geist, system-ui, sans-serif" font-size="12" font-weight="400">READ RECEIPT: snapshot complete → producer may unlink; not request retirement</text>
