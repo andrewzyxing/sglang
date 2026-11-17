@@ -1,84 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="decoded-rgb-shm-title decoded-rgb-shm-desc" id="decoded-rgb-shm-root">
-<title id="decoded-rgb-shm-title">Decoded media sidecar ingress</title>
-<desc id="decoded-rgb-shm-desc">Native api.v1 carries decoded media references; bounded owned snapshots feed existing Python model processors, with a read receipt for producer cleanup.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="decoded-rgb-shm-native-rust-title decoded-rgb-shm-native-rust-desc" id="decoded-rgb-shm-native-rust-root">
+<title id="decoded-rgb-shm-native-rust-title">Native Rust RGB shared-memory ingress</title>
+<desc id="decoded-rgb-shm-native-rust-desc">The sidecar publishes RGB in a shared volume and sends api.v1 references; bounded Rust snapshots enter existing native image processors, feature buffers and execution, with read receipts for producer cleanup.</desc>
 <defs>
       <style>@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;family=Noto+Serif:ital@0;1&amp;family=Noto+Sans+KR:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400&amp;family=Noto+Sans+TC:wght@400;500;600&amp;family=Noto+Serif+TC:wght@400&amp;display=swap');
-      #decoded-rgb-shm-root { color: #2d3142; font-family: Geist,system-ui,sans-serif; }
-      #decoded-rgb-shm-root .diagram-container { width:100%;overflow-x:auto }</style><marker id="decoded-rgb-shm-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#4f5d75"/></marker></defs>
+      #decoded-rgb-shm-native-rust-root { color: #2d3142; font-family: Geist,system-ui,sans-serif; }
+      #decoded-rgb-shm-native-rust-root .diagram-container { width:100%;overflow-x:auto }
+      @media print {
+#decoded-rgb-shm-native-rust-root .diagram-container { overflow-x:visible }
+}</style><marker id="decoded-rgb-shm-native-rust-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6Z" fill="#4f5d75"/></marker></defs>
 <rect width="1280" height="720" fill="#f5f5f5"/>
-<text x="32" y="52" fill="#2d3142" font-family="Geist, system-ui, sans-serif" font-size="30" font-weight="600">Decoded media without large gRPC bodies</text>
-<text x="32" y="84" fill="#4f5d75" font-family="Geist, system-ui, sans-serif" font-size="15" font-weight="400">#50781 implementation: opt-in single-rank bridge; CPU / GPU validation pending</text>
-<rect x="264" y="144" width="1000" height="448" rx="8" fill="#f0f0f0" stroke="#5a6580" stroke-dasharray="5 4"/>
-<text x="284" y="172" fill="#5a6580" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">SAME POD / HOST — EXPLICIT SHARED-VOLUME MOUNT</text>
-<rect x="516" y="192" width="744" height="384" rx="8" fill="#f5f5f5" stroke="#bfc0c0"/>
-<text x="540" y="216" fill="#5a6580" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">SGLANG ENGINE</text>
-<path d="M216 280 L288 280" fill="none" stroke="#4f5d75" stroke-width="1.6" marker-end="url(#decoded-rgb-shm-arrow)"/>
-<path d="M456 280 L540 280" fill="none" stroke="#4f5d75" stroke-width="1.6" marker-end="url(#decoded-rgb-shm-arrow)"/>
-<path d="M724 280 L796 280" fill="none" stroke="#4f5d75" stroke-width="1.6" marker-end="url(#decoded-rgb-shm-arrow)"/>
-<path d="M980 280 L1052 280" fill="none" stroke="#4f5d75" stroke-width="1.6" marker-end="url(#decoded-rgb-shm-arrow)"/>
-<path d="M372 328 L372 448" fill="none" stroke="#4f5d75" stroke-width="1.6" marker-end="url(#decoded-rgb-shm-arrow)"/>
-<path d="M480 492 H880 Q888 492 888 484 V328" fill="none" stroke="#4f5d75" stroke-width="1.6" marker-end="url(#decoded-rgb-shm-arrow)"/>
-<path d="M1150 328 L1150 448" fill="none" stroke="#4f5d75" stroke-width="1.6" marker-end="url(#decoded-rgb-shm-arrow)"/>
-<path d="M604 328 V352 Q604 360 596 360 H480 Q472 360 472 352 V320 Q472 312 464 312 H456" fill="none" stroke="#4f5d75" stroke-width="1.6" marker-end="url(#decoded-rgb-shm-arrow)"/>
-<rect x="492" y="368" width="72" height="22" fill="#f5f5f5"/>
-<text x="496" y="382" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11">READ ACK</text>
-<rect x="220" y="246" width="64" height="22" fill="#f5f5f5"/>
-<text x="224" y="260" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">HANDOFF</text>
-<rect x="470" y="246" width="40" height="22" fill="#f5f5f5"/>
-<text x="474" y="260" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">REF</text>
-<rect x="736" y="246" width="50" height="22" fill="#f5f5f5"/>
-<text x="740" y="260" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">LOWER</text>
-<rect x="987" y="246" width="58" height="22" fill="#f5f5f5"/>
-<text x="991" y="260" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">MEDIA</text>
-<rect x="388" y="374" width="72" height="22" fill="#f5f5f5"/>
-<text x="392" y="388" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">PUBLISH</text>
-<rect x="900" y="398" width="124" height="22" fill="#f5f5f5"/>
-<text x="904" y="412" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">READ / IMPORT</text>
-<rect x="1164" y="370" width="84" height="22" fill="#f5f5f5"/>
-<text x="1168" y="384" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">FEATURES</text>
-<g data-node-id="frontend"><rect x="32" y="232" width="184" height="96" rx="6" fill="#f5f5f5" stroke="#4f5d75" stroke-width="1.4"/>
-<text x="44" y="258" fill="#2d3142" font-family="Geist, system-ui, sans-serif" font-size="16" font-weight="600">Frontend</text>
-<text x="44" y="282" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">Decode / sample</text>
-<text x="44" y="302" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">Keep frame semantics</text>
+<text x="40" y="60" fill="#2d3142" font-family="Instrument Serif, Georgia, serif" font-size="40" font-weight="400">RGB shared memory into native Rust preprocessing</text>
+<text x="40" y="92" fill="#4f5d75" font-family="Geist, system-ui, sans-serif" font-size="16" font-weight="400">#50781 · Small api.v1 references; existing model processors and scheduler handoff</text>
+<rect x="24" y="144" width="1232" height="436" rx="8" fill="#f0f0f0" stroke="#5a6580" stroke-width="1.2" stroke-dasharray="5 4"/>
+<text x="40" y="172" fill="#5a6580" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">SAME POD / HOST · EXPLICIT SHARED-VOLUME MOUNT</text>
+<rect x="312" y="192" width="936" height="372" rx="8" fill="#f5f5f5" stroke="#bfc0c0" stroke-width="1.2" />
+<text x="332" y="216" fill="#5a6580" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">SGLANG ENGINE · RUST PREPROCESSING</text>
+<path d="M232 280 H360" fill="none" stroke="#4f5d75" stroke-width="1.6" marker-end="url(#decoded-rgb-shm-native-rust-arrow)"/>
+<path d="M472 328 V436" fill="none" stroke="#4f5d75" stroke-width="1.6" marker-end="url(#decoded-rgb-shm-native-rust-arrow)"/>
+<path d="M136 328 V436" fill="none" stroke="#4f5d75" stroke-width="1.6" marker-end="url(#decoded-rgb-shm-native-rust-arrow)"/>
+<path d="M232 492 H360" fill="none" stroke="#4f5d75" stroke-width="1.6" marker-end="url(#decoded-rgb-shm-native-rust-arrow)"/>
+<path d="M584 492 H688 Q696 492 696 484 V296 Q696 288 704 288 H800" fill="none" stroke="#4f5d75" stroke-width="1.6" marker-end="url(#decoded-rgb-shm-native-rust-arrow)"/>
+<path d="M890 344 V436" fill="none" stroke="#4f5d75" stroke-width="1.6" marker-end="url(#decoded-rgb-shm-native-rust-arrow)"/>
+<path d="M980 492 H1036" fill="none" stroke="#4f5d75" stroke-width="1.6" marker-end="url(#decoded-rgb-shm-native-rust-arrow)"/>
+<path d="M420 436 V384 Q420 376 412 376 H200 Q192 376 192 368 V328" fill="none" stroke="#4f5d75" stroke-width="1.6" marker-end="url(#decoded-rgb-shm-native-rust-arrow)" stroke-dasharray="5 4"/>
+<rect x="248" y="248" width="96" height="14" fill="#f5f5f5"/>
+<text x="252" y="259" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">REFERENCE</text>
+<rect x="488" y="368" width="88" height="14" fill="#f5f5f5"/>
+<text x="492" y="379" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">VALIDATE</text>
+<rect x="48" y="368" width="72" height="14" fill="#f5f5f5"/>
+<text x="52" y="379" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">PUBLISH</text>
+<rect x="260" y="460" width="56" height="14" fill="#f5f5f5"/>
+<text x="264" y="471" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">READ</text>
+<rect x="712" y="376" width="76" height="14" fill="#f5f5f5"/>
+<text x="716" y="387" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">RGB DATA</text>
+<rect x="908" y="376" width="68" height="14" fill="#f5f5f5"/>
+<text x="912" y="387" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">FEATURES</text>
+<rect x="248" y="344" width="112" height="14" fill="#f5f5f5"/>
+<text x="252" y="355" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">READ RECEIPT</text>
+<g data-node-id="producer">
+<rect x="40" y="232" width="192" height="96" rx="6" fill="#f5f5f5" stroke="#4f5d75" stroke-width="1.2" />
+<text x="52" y="260" fill="#2d3142" font-family="Geist, system-ui, sans-serif" font-size="16" font-weight="600">Runtime sidecar</text>
+<text x="52" y="284" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">Own payload leases</text>
+<text x="52" y="304" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">Publish immutable RGB</text>
 </g>
-<g data-node-id="sidecar"><rect x="288" y="232" width="168" height="96" rx="6" fill="#f5f5f5" stroke="#4f5d75" stroke-width="1.4"/>
-<text x="300" y="258" fill="#2d3142" font-family="Geist, system-ui, sans-serif" font-size="16" font-weight="600">Rust sidecar</text>
-<text x="300" y="282" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">Own admission</text>
-<text x="300" y="302" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">Own payload leases</text>
+<g data-node-id="api">
+<rect x="360" y="232" width="224" height="96" rx="6" fill="#fae9e2" stroke="#bf4520" stroke-width="1.2" />
+<text x="372" y="260" fill="#bf4520" font-family="Geist, system-ui, sans-serif" font-size="16" font-weight="600">api.v1 SHM input</text>
+<text x="372" y="284" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">ref · size · stride</text>
+<text x="372" y="304" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">target instance_id</text>
 </g>
-<g data-node-id="api"><rect x="540" y="232" width="184" height="96" rx="6" fill="#fae9e2" stroke="#bf4520" stroke-width="1.4"/>
-<text x="552" y="258" fill="#bf4520" font-family="Geist, system-ui, sans-serif" font-size="16" font-weight="600">api.v1 descriptor</text>
-<text x="552" y="282" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">Generate.decoded_media</text>
-<text x="552" y="302" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">Small descriptors only</text>
+<g data-node-id="snapshot">
+<rect x="360" y="436" width="224" height="112" rx="6" fill="#fae9e2" stroke="#bf4520" stroke-width="1.2" />
+<text x="372" y="464" fill="#bf4520" font-family="Geist, system-ui, sans-serif" font-size="16" font-weight="600">Rust owned snapshot</text>
+<text x="372" y="488" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">Bounded SHM read</text>
+<text x="372" y="508" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">RgbImageLayout.pack_owned</text>
+<text x="372" y="528" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">Receipt after full copy</text>
 </g>
-<g data-node-id="import"><rect x="796" y="232" width="184" height="96" rx="6" fill="#fae9e2" stroke="#bf4520" stroke-width="1.4"/>
-<text x="808" y="258" fill="#bf4520" font-family="Geist, system-ui, sans-serif" font-size="16" font-weight="600">Media snapshot</text>
-<text x="808" y="282" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">Bounded owned bytes</text>
-<text x="808" y="302" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">RGB / frames / PCM</text>
+<g data-node-id="processor">
+<rect x="800" y="232" width="416" height="112" rx="6" fill="#f5f5f5" stroke="#4f5d75" stroke-width="1.2" />
+<text x="812" y="260" fill="#2d3142" font-family="Geist, system-ui, sans-serif" font-size="16" font-weight="600">Existing Rust processors</text>
+<text x="812" y="284" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">sglang-processor → Dynamo</text>
+<text x="812" y="304" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">MmFamilyProcessor.process_item</text>
+<text x="812" y="324" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">DecodedMedia::Image → layout / positions</text>
 </g>
-<g data-node-id="processor"><rect x="1052" y="232" width="196" height="96" rx="6" fill="#f5f5f5" stroke="#4f5d75" stroke-width="1.4"/>
-<text x="1064" y="258" fill="#2d3142" font-family="Geist, system-ui, sans-serif" font-size="16" font-weight="600">Python processor</text>
-<text x="1064" y="282" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">Resize / normalize</text>
-<text x="1064" y="302" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">Patches + token layout</text>
+<g data-node-id="storage">
+<rect x="40" y="436" width="192" height="112" rx="6" fill="#f5f5f5" stroke="#4f5d75" stroke-width="1.2" />
+<text x="52" y="464" fill="#2d3142" font-family="Geist, system-ui, sans-serif" font-size="16" font-weight="600">Shared CPU memory</text>
+<text x="52" y="488" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">Same mounted volume</text>
+<text x="52" y="508" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">Immutable RGB object</text>
+<text x="52" y="528" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">Producer-owned name</text>
 </g>
-<g data-node-id="storage"><rect x="288" y="448" width="192" height="88" rx="6" fill="#f5f5f5" stroke="#4f5d75" stroke-width="1.4"/>
-<text x="300" y="474" fill="#2d3142" font-family="Geist, system-ui, sans-serif" font-size="14" font-weight="600">Shared CPU memory</text>
-<text x="300" y="498" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">Immutable media bytes</text>
-<text x="300" y="518" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">Snapshot + read ACK</text>
+<g data-node-id="features">
+<rect x="800" y="436" width="180" height="112" rx="6" fill="#f5f5f5" stroke="#4f5d75" stroke-width="1.2" />
+<text x="812" y="464" fill="#2d3142" font-family="Geist, system-ui, sans-serif" font-size="16" font-weight="600">Feature buffers</text>
+<text x="812" y="488" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">MmEncodedEntry</text>
+<text x="812" y="508" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">Typed buffers / ring</text>
+<text x="812" y="528" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">Existing handoff</text>
 </g>
-<g data-node-id="gpu"><rect x="1052" y="448" width="196" height="88" rx="6" fill="#f5f5f5" stroke="#4f5d75" stroke-width="1.4"/>
-<text x="1064" y="474" fill="#2d3142" font-family="Geist, system-ui, sans-serif" font-size="16" font-weight="600">Model execution</text>
-<text x="1064" y="498" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">Existing execution</text>
-<text x="1064" y="518" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="11" font-weight="400">No new model adapter</text>
+<g data-node-id="execution">
+<rect x="1036" y="436" width="180" height="112" rx="6" fill="#f5f5f5" stroke="#4f5d75" stroke-width="1.2" />
+<text x="1048" y="464" fill="#2d3142" font-family="Geist, system-ui, sans-serif" font-size="16" font-weight="600">Model execution</text>
+<text x="1048" y="488" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">Existing scheduler</text>
+<text x="1048" y="508" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">Vision encoder → LLM</text>
+<text x="1048" y="528" fill="#4f5d75" font-family="Geist Mono, ui-monospace, monospace" font-size="12" font-weight="400">Existing execution</text>
 </g>
-<text x="32" y="372" fill="#4f5d75" font-family="Geist, system-ui, sans-serif" font-size="12" font-weight="400">Large media payloads</text>
-<text x="32" y="392" fill="#4f5d75" font-family="Geist, system-ui, sans-serif" font-size="12" font-weight="400">stay out of RPC bodies.</text>
-<text x="32" y="424" fill="#5a6580" font-family="Geist, system-ui, sans-serif" font-size="11" font-weight="400">Cross-host object transport</text>
-<text x="32" y="444" fill="#5a6580" font-family="Geist, system-ui, sans-serif" font-size="11" font-weight="400">is application-owned.</text>
-<text x="288" y="624" fill="#2d3142" font-family="Geist, system-ui, sans-serif" font-size="14" font-weight="600">Media crosses the shared volume. Existing model processors stay in the engine.</text>
-<line x1="32" y1="656" x2="1248" y2="656" stroke="#bfc0c0"/>
-<text x="32" y="686" fill="#bf4520" font-family="Geist, system-ui, sans-serif" font-size="12" font-weight="400">ORANGE: #50781 ingress</text>
-<text x="320" y="686" fill="#4f5d75" font-family="Geist, system-ui, sans-serif" font-size="12" font-weight="400">READ ACK: snapshot complete, not retirement</text>
-<text x="760" y="686" fill="#4f5d75" font-family="Geist, system-ui, sans-serif" font-size="12" font-weight="400">Single rank; no TP / P/D claim</text>
+<text x="40" y="608" fill="#2d3142" font-family="Geist, system-ui, sans-serif" font-size="14" font-weight="600">Current scope: existing native image families · single rank · unified deployment</text>
+<text x="40" y="636" fill="#4f5d75" font-family="Geist, system-ui, sans-serif" font-size="12" font-weight="400">Native video / audio follow upstream; not enabled. No new per-model adapters or Python processor bridge.</text>
+<line x1="40" y1="660" x2="1240" y2="660" stroke="#bfc0c0"/>
+<text x="40" y="688" fill="#bf4520" font-family="Geist, system-ui, sans-serif" font-size="12" font-weight="400">ORANGE: #50781 SHM ingress</text>
+<text x="384" y="688" fill="#4f5d75" font-family="Geist, system-ui, sans-serif" font-size="12" font-weight="400">READ RECEIPT: snapshot complete → producer may unlink; not request retirement</text>
 </svg>
